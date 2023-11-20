@@ -1,0 +1,37 @@
+specVersion: v0.1.0
+package:
+  name: erc20TransfersApprovals
+  version: v0.3.0
+  url: https://github.com/pinax-network/substreams-erc20-transfers-approvals
+  doc: ERC-20
+
+imports:
+  entities: https://github.com/streamingfast/substreams-sink-entity-changes/releases/download/v1.3.0/substreams-sink-entity-changes-v1.3.0.spkg
+
+binaries:
+  default:
+    type: wasm/rust-v1
+    file: ./target/wasm32-unknown-unknown/release/erc20.wasm
+
+protobuf:
+  files:
+    - erc20.proto
+  importPaths:
+    - ./proto/v1
+
+modules:
+  - name: map_block
+    kind: map
+    doc: Extracts 'Approval' & 'Transfer' events from the block
+    inputs:
+      - source: sf.ethereum.type.v2.Block
+    output:
+      type: proto:erc20.types.v1.Block
+
+  - name: graph_out
+    kind: map
+    inputs:
+      - source: sf.substreams.v1.Clock
+      - map: map_block
+    output:
+      type: proto:sf.substreams.sink.entity.v1.EntityChanges
