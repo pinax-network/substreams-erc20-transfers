@@ -7,13 +7,3 @@ type Transfers @entity(immutable: true) {
   value: String!
   transaction: String!
 }
-
-# Log
-type Approvals @entity(immutable: true) {
-  id: ID!
-  address: String!
-  owner: String!
-  spender: String!
-  value: String!
-  transaction: String!
-}

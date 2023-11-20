@@ -5,7 +5,7 @@
 ## Quickstart
 
 ```
-$ gh repo clone pinax-network/substreams-erc20-transfers-approuvals
+$ gh repo clone pinax-network/substreams-erc20-transfers
 $ cd substreams-erc20
 $ make
 $ make gui
@@ -13,7 +13,7 @@ $ make gui
 
 ## Releases
 
-- https://github.com/pinax-network/substreams-erc20-transfers-approuvals/releases
+- https://github.com/pinax-network/substreams-erc20-transfers/releases
 
 ## References
 
@@ -24,45 +24,44 @@ $ make gui
 
 ### Events
 
-| Event                                                          | Description                                                                         |
-| -------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| [`Transfer`](https://eips.ethereum.org/EIPS/eip-20#transfer-1) | MUST trigger when tokens are transferred, including zero value transfers.           |
-| [`Approval`](https://eips.ethereum.org/EIPS/eip-20#approval)   | MUST trigger on any successful call to `approve(address _spender, uint256 _value)`. |
+| Event                                                          | Description                                                               |
+| -------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| [`Transfer`](https://eips.ethereum.org/EIPS/eip-20#transfer-1) | MUST trigger when tokens are transferred, including zero value transfers. |
 
 ### Mermaid Graph
 
 ```mermaid
 graph TD;
-  map_block[map: map_block];
-  sf.ethereum.type.v2.Block[source: sf.ethereum.type.v2.Block] --> map_block;
+  map_transfers[map: map_transfers];
+  sf.ethereum.type.v2.Block[source: sf.ethereum.type.v2.Block] --> map_transfers;
   graph_out[map: graph_out];
-  map_block --> graph_out;
+  map_transfers --> graph_out;
 
 ```
 
 Here is a quick link to see the graph:
 
-https://mermaid.live/edit#pako:eJx0js1qhTAQhV8lzNobLu0u7opv0O4akWky_lBjQpwpiPjuhQhKF12emW_ONzu46AkMDBnTqD6a2i5KBUzd1xzd92fAZO7Ylu3aa-KRMknQvCXSPy_6rdBrlOzI_E-06vGw8ny-0l1aOou-i8Kn8Yrt33_u84uo7QIVBMoBJw8Gdgs8UiALxoKnHmVmCwdUgMLxfVscGM5CFUjyyNRMOGQM5_D4DQAA__-g018Y
+https://mermaid.live/edit#pako:eJx0js9qwzAMh1_F6Jyast3c2-gbbLc6FGErTVn9B1kalJB3HySQEUaP-vHx6ZsglEjg4MZYR_N1PvlsTMJ6FcbcBuJ2SVjdfuoXqg2WZCQmTVaelezPm_14lPB9aUU5kHtN9OZw8Ho8vtNevHiXlGtRWT9vZ_-_7U-zUSefoYNEnPAewcHkQUZK5MF5iDSgPsTDDB2gSvl85gBOWKkDrRGFzne8MaZ1nH8DAAD__-8lZkw
 
 ### Modules
 
 ```yaml
-Package name: erc20TransfersApprovals
+Package name: erc20Transfers
 Version: v0.3.0
 Doc: ERC-20
 Modules:
 ----
-Name: map_block
+Name: map_transfers
 Initial block: 0
 Kind: map
 Output Type: proto:erc20.types.v1.Block
-Hash: d2e09cd303cbcba7596ecb53736b823f480e6450
-Doc: Extracts 'Approval' & 'Transfer' events from the block
+Hash: 6a9df0f0181a7785783c9441124b941baee5b6dc
+Doc: Extracts 'Transfer' events from the block
 
 Name: graph_out
 Initial block: 0
 Kind: map
 Output Type: proto:sf.substreams.sink.entity.v1.EntityChanges
-Hash: dfa0756e058e1b7c7832879744a108acdd911720
+Hash: 97fe61163e78adb6c120ae2b63183a060e116635
 
 ```

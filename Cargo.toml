@@ -1,5 +1,5 @@
 [package]
-name = "erc20-transfers-approvals"
+name = "erc20-transfers"
 version = "0.3.0"
 description = "ERC-20"
 edition = "2021"
