@@ -13,7 +13,7 @@ pub fn graph_out(block: Erc20Block) -> Result<EntityChanges, Error> {
         let id = format!("{}-{}", event.block_index, event.transaction);
 
         tables
-            .create_row("Transfer", id)
+            .create_row("Transfers", id)
             // contract address
             .set("address", event.address)
             // event payload
@@ -28,7 +28,7 @@ pub fn graph_out(block: Erc20Block) -> Result<EntityChanges, Error> {
         let id = format!("{}-{}", event.block_index, event.transaction);
 
         tables
-            .create_row("Approval", id)
+            .create_row("Approvals", id)
             // contract address
             .set("address", event.address)
             // event payload
