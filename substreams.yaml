@@ -1,7 +1,7 @@
 specVersion: v0.1.0
 package:
   name: erc20Transfers
-  version: v0.3.0
+  version: v0.0.1
   url: https://github.com/pinax-network/substreams-erc20-transfers
   doc: ERC-20
 
