@@ -1,15 +1,13 @@
 
 use crate::pb::erc20::types::v1::Block as Erc20Block;
-use substreams::{errors::Error, pb::substreams::Clock};
+use substreams::errors::Error;
 use substreams_entity_change::pb::entity::EntityChanges;
 use substreams_entity_change::tables::Tables;
 
 
 #[substreams::handlers::map]
-pub fn graph_out(clock: Clock, block: Erc20Block) -> Result<EntityChanges, Error> {
+pub fn graph_out(block: Erc20Block) -> Result<EntityChanges, Error> {
     let mut tables = Tables::new();
-    let block_num = clock.number.to_string();
-    let timestamp = clock.timestamp.unwrap().seconds.to_string();
 
     for event in block.transfers {
         let id = format!("{}-{}", event.block_index, event.transaction);
@@ -23,9 +21,7 @@ pub fn graph_out(clock: Clock, block: Erc20Block) -> Result<EntityChanges, Error
             .set("to", event.to)
             .set("value", event.value)
             // trace information
-            .set("transaction", event.transaction)
-            .set_bigint("block_num", &block_num)
-            .set_bigint("timestamp", &timestamp);
+            .set("transaction", event.transaction);
     }
 
     for event in block.approvals {
@@ -40,9 +36,7 @@ pub fn graph_out(clock: Clock, block: Erc20Block) -> Result<EntityChanges, Error
             .set("spender", event.spender)
             .set("value", event.value)
             // trace information
-            .set("transaction", event.transaction)
-            .set_bigint("block_num", &block_num)
-            .set_bigint("timestamp", &timestamp);
+            .set("transaction", event.transaction);
     }
 
     Ok(tables.to_entity_changes())

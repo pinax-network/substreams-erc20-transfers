@@ -36,19 +36,18 @@ graph TD;
   map_block[map: map_block];
   sf.ethereum.type.v2.Block[source: sf.ethereum.type.v2.Block] --> map_block;
   graph_out[map: graph_out];
-  sf.substreams.v1.Clock[source: sf.substreams.v1.Clock] --> graph_out;
   map_block --> graph_out;
 
 ```
 
 Here is a quick link to see the graph:
 
-https://mermaid.live/edit#pako:eJx0j0FqAzEMRa9itJ6YtN25uzY3aHd1CIqtZEKj2NhSIIS5e8EDM22ZLL_-5z10h5AigYNjwdybz82rvxjDmHf7cwrfX4zZzXHb2nqwJD0VUrZyy2Svz_atrWvSEsg9XmzNauV1vX6hGdqYTb9LKqNxipOx6r5KIeRqr0_2_b9uof7lmnB_v1seQAdMhfEUwcHdg_TE5MF5iHRAPYuHATpAlfRxuwRwUpQ60BxRaHPCY0Eej8NPAAAA__89CXqq
+https://mermaid.live/edit#pako:eJx0js1qhTAQhV8lzNobLu0u7opv0O4akWky_lBjQpwpiPjuhQhKF12emW_ONzu46AkMDBnTqD6a2i5KBUzd1xzd92fAZO7Ylu3aa-KRMknQvCXSPy_6rdBrlOzI_E-06vGw8ny-0l1aOou-i8Kn8Yrt33_u84uo7QIVBMoBJw8Gdgs8UiALxoKnHmVmCwdUgMLxfVscGM5CFUjyyNRMOGQM5_D4DQAA__-g018Y
 
 ### Modules
 
 ```yaml
-Package name: erc20
+Package name: erc20TransfersApprovals
 Version: v0.3.0
 Doc: ERC-20
 Modules:
@@ -64,6 +63,6 @@ Name: graph_out
 Initial block: 0
 Kind: map
 Output Type: proto:sf.substreams.sink.entity.v1.EntityChanges
-Hash: 66ff1796c3eb93e9ab07c0ce6417993e84f7859b
+Hash: dfa0756e058e1b7c7832879744a108acdd911720
 
 ```
