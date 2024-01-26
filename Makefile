@@ -27,11 +27,11 @@ info:
 
 .PHONY: run
 run:
-	substreams run graph_out -e eosevm.substreams.pinax.network:443 -s 1
+	substreams run map_transfers -e eosevm.substreams.pinax.network:443 -s 1000
 
 .PHONY: gui
 gui:
-	substreams gui graph_out -e eosevm.substreams.pinax.network:443 -s -1000
+	substreams gui map_transfers -e eosevm.substreams.pinax.network:443 -s -1000
 
 .PHONY: deploy
 deploy:
