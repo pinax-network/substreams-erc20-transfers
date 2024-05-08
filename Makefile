@@ -33,6 +33,10 @@ run:
 gui:
 	substreams gui map_transfers -e eosevm.substreams.pinax.network:443 -s -100000
 
+.PHONY: sink
+sink:
+	substreams gui db_out -e eosevm.substreams.pinax.network:443 -s -100000
+
 .PHONY: deploy
 deploy:
 	graph deploy --studio erc-20
