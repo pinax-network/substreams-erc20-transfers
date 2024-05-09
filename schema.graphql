@@ -6,4 +6,6 @@ type Transfers @entity(immutable: true) {
   to: String!
   value: String!
   transaction: String!
+  block_number: String!
+  timestamp: String!
 }
