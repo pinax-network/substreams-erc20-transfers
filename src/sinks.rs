@@ -7,8 +7,12 @@ use crate::pb::erc20::types::v1::TransferEvents;
 
 
 #[substreams::handlers::map]
-pub fn graph_out(transfers: TransferEvents) -> Result<EntityChanges, Error> {
+pub fn graph_out(clock: Clock,transfers: TransferEvents) -> Result<EntityChanges, Error> {
     let mut tables = Tables::new();
+
+
+    let block = clock.number.to_string();
+    let timestamp = clock.timestamp.unwrap().seconds.to_string();
 
     for event in transfers.transfers {
         let id = format!("{}-{}", event.block_index, event.transaction);
@@ -22,7 +26,9 @@ pub fn graph_out(transfers: TransferEvents) -> Result<EntityChanges, Error> {
             .set("to", event.to)
             .set("value", event.value)
             // trace information
-            .set("transaction", event.transaction);
+            .set("transaction", event.transaction)
+            .set("block_number", block.clone())
+            .set("timestamp", timestamp.clone());
     }
     Ok(tables.to_entity_changes())
 }
