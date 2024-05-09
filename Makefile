@@ -27,15 +27,15 @@ info:
 
 .PHONY: run
 run:
-	substreams run map_transfers -e eosevm.substreams.pinax.network:443 -s 1000
+	substreams run map_transfers -e eth.substreams.pinax.network:443 -s 1000
 
 .PHONY: gui
 gui:
-	substreams gui map_transfers -e eosevm.substreams.pinax.network:443 -s -100000
+	substreams gui map_transfers -e eth.substreams.pinax.network:443 -s -100000
 
 .PHONY: sink
 sink:
-	substreams gui db_out -e eosevm.substreams.pinax.network:443 -s -100000
+	substreams gui db_out -e eth.substreams.pinax.network:443 -s -100000
 
 .PHONY: deploy
 deploy:

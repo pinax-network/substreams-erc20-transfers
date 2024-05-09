@@ -36,6 +36,9 @@ graph TD;
   sf.ethereum.type.v2.Block[source: sf.ethereum.type.v2.Block] --> map_transfers;
   graph_out[map: graph_out];
   map_transfers --> graph_out;
+  db_out[map: db_out];
+  sf.substreams.v1.Clock[source: sf.substreams.v1.Clock] --> db_out;
+  map_transfers --> db_out;
 
 ```
 
@@ -46,22 +49,27 @@ https://mermaid.live/edit#pako:eJx0js9qwzAMh1_F6Jyast3c2-gbbLc6FGErTVn9B1kalJB3H
 ### Modules
 
 ```yaml
-Package name: erc20Transfers
-Version: v0.3.0
-Doc: ERC-20
-Modules:
-----
 Name: map_transfers
 Initial block: 0
 Kind: map
-Output Type: proto:erc20.types.v1.Block
-Hash: 6a9df0f0181a7785783c9441124b941baee5b6dc
-Doc: Extracts 'Transfer' events from the block
+Input: source: sf.ethereum.type.v2.Block
+Output Type: proto:erc20.types.v1.TransferEvents
+Hash: 033188f6dc056af789d660bcfc230e96b2f453b1
+Doc:  Extracts 'Transfer' events from the block
 
 Name: graph_out
 Initial block: 0
 Kind: map
+Input: map: map_transfers
 Output Type: proto:sf.substreams.sink.entity.v1.EntityChanges
-Hash: 97fe61163e78adb6c120ae2b63183a060e116635
+Hash: ba658be93ce580f59c36ded910ec8ebbf22dcb3f
+
+Name: db_out
+Initial block: 0
+Kind: map
+Input: source: sf.substreams.v1.Clock
+Input: map: map_transfers
+Output Type: proto:sf.substreams.sink.database.v1.DatabaseChanges
+Hash: ddc2831734c9cf4b591b13825eb37a279da6b35b
 
 ```
