@@ -22,7 +22,6 @@ protobuf:
 
 modules:
   - name: map_transfers
-    initialBlock: 3000000
     kind: map
     doc: Extracts 'Transfer' events from the block
     inputs:
