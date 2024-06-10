@@ -34,7 +34,9 @@ $ make gui
 graph TD;
   map_transfers[map: map_transfers];
   sf.ethereum.type.v2.Block[source: sf.ethereum.type.v2.Block] --> map_transfers;
+  map_transfers --> index_transfers;
   graph_out[map: graph_out];
+  sf.substreams.v1.Clock[source: sf.substreams.v1.Clock] --> graph_out;
   map_transfers --> graph_out;
   db_out[map: db_out];
   sf.substreams.v1.Clock[source: sf.substreams.v1.Clock] --> db_out;
@@ -54,22 +56,31 @@ Initial block: 0
 Kind: map
 Input: source: sf.ethereum.type.v2.Block
 Output Type: proto:erc20.types.v1.TransferEvents
-Hash: 033188f6dc056af789d660bcfc230e96b2f453b1
+Hash: 535bceb547b75a87d5fa50198a4c75aa53dbc79d
 Doc:  Extracts 'Transfer' events from the block
+
+Name: index_transfers
+Initial block: 0
+Kind: index
+Input: map: map_transfers
+Output Type: proto:sf.substreams.index.v1.Keys
+Hash: df6b7d955f808b4d651f2788ab23870f0c75b958
 
 Name: graph_out
 Initial block: 0
 Kind: map
+Input: source: sf.substreams.v1.Clock
 Input: map: map_transfers
 Output Type: proto:sf.substreams.sink.entity.v1.EntityChanges
-Hash: ba658be93ce580f59c36ded910ec8ebbf22dcb3f
+Hash: b78854193ba93ab43477a658f706b0fc63b57996
 
 Name: db_out
 Initial block: 0
 Kind: map
 Input: source: sf.substreams.v1.Clock
 Input: map: map_transfers
+Block Filter: (using *index_transfers*): `&{inscription}`
 Output Type: proto:sf.substreams.sink.database.v1.DatabaseChanges
-Hash: ddc2831734c9cf4b591b13825eb37a279da6b35b
+Hash: e2b5ade6d06a300688f1545793bc78d661c88bb6
 
 ```

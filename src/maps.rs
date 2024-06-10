@@ -3,9 +3,23 @@ use crate::pb::erc20::types::v1::{TransferEvents, TransferEvent};
 use abi::erc20::events::Transfer;
 use substreams::errors::Error;
 use substreams::Hex;
+use substreams::pb::sf::substreams::index::v1::Keys;
 use substreams_ethereum::block_view::LogView;
 use substreams_ethereum::pb::eth::v2::Block;
 use substreams_ethereum::Event;
+
+
+#[substreams::handlers::map]
+fn index_transfers(transfers: TransferEvents) -> Result<Keys, Error> {
+    Ok(match transfers.transfers.is_empty() {
+        true => Keys::default(),
+        false => Keys {
+            keys: vec!["transfers".to_string()]
+        },
+    })
+}
+
+
 
 #[substreams::handlers::map]
 pub fn map_transfers(block: Block) -> Result<TransferEvents, Error> {

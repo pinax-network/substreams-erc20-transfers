@@ -31,12 +31,11 @@ run:
 
 .PHONY: gui
 gui:
-	substreams gui map_transfers -e eth.substreams.pinax.network:443 -s -100000
+	substreams gui map_transfers -e eth.substreams.pinax.network:443 -s -1000
 
 .PHONY: sink
 sink:
-	substreams gui db_out -e eth.substreams.pinax.network:443 -s -100000
-
+	substreams gui db_out -e eth.substreams.pinax.network:443 -s -1000
 .PHONY: deploy
 deploy:
 	graph deploy --studio erc-20

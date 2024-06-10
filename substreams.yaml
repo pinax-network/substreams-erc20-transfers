@@ -29,6 +29,13 @@ modules:
     output:
       type: proto:erc20.types.v1.TransferEvents
 
+  - name: index_transfers
+    kind: blockIndex
+    inputs:
+      - map: map_transfers
+    output:
+      type: proto:sf.substreams.index.v1.Keys
+
   - name: graph_out
     kind: map
     inputs:
@@ -42,6 +49,11 @@ modules:
     inputs:
       - source: sf.substreams.v1.Clock
       - map: map_transfers
+    blockFilter:
+      module: index_transfers
+      query:
+        string: inscription
+        params: false
     output:
       type: proto:sf.substreams.sink.database.v1.DatabaseChanges
 
