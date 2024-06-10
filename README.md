@@ -79,8 +79,8 @@ Initial block: 0
 Kind: map
 Input: source: sf.substreams.v1.Clock
 Input: map: map_transfers
-Block Filter: (using *index_transfers*): `&{inscription}`
+Block Filter: (using *index_transfers*): `&{transfers}`
 Output Type: proto:sf.substreams.sink.database.v1.DatabaseChanges
-Hash: e2b5ade6d06a300688f1545793bc78d661c88bb6
+Hash: baedd562d8c7f1e216d8bd3f9841f685c9e019d4
 
 ```
