@@ -1,36 +1,36 @@
-CREATE TABLE IF NOT EXISTS Transfers  (
+CREATE TABLE IF NOT EXISTS transfers  (
     "id" String,
-    address FixedString(40),
+    contract FixedString(40),
     `from` String,
     `to` String,
     value String,
     transaction String,
-    block_number    UInt32(),
+    block_num   UInt32(),
     timestamp       DateTime64(3, 'UTC'),
 )
 ENGINE = MergeTree PRIMARY KEY ("id")
-ORDER BY (id,timestamp, block_number);
+ORDER BY (id,block_num,timestamp);
 
 -- Indexes for block_number
-ALTER TABLE Transfers ADD INDEX transfers_block_number_index block_number TYPE minmax;
+ALTER TABLE transfers ADD INDEX transfers_block_number_index block_num TYPE minmax;
 
 -- MV for contract --
-CREATE MATERIALIZED VIEW mv_transfers_contract
+CREATE MATERIALIZED VIEW transfers_contract_historical_mv
 ENGINE = MergeTree()
-ORDER BY (address, `from`,`to`)
+ORDER BY (contract, `from`,`to`)
 POPULATE
-AS SELECT * FROM Transfers;
+AS SELECT * FROM transfers;
 
 -- MV for from --
-CREATE MATERIALIZED VIEW mv_transfers_from
+CREATE MATERIALIZED VIEW transfers_from_historical_mv
 ENGINE = MergeTree()
-ORDER BY (`from`, address)
+ORDER BY (`from`, contract)
 POPULATE
-AS SELECT * FROM Transfers;
+AS SELECT * FROM transfers;
 
 -- MV for from --
-CREATE MATERIALIZED VIEW mv_transfers_to
+CREATE MATERIALIZED VIEW transfers_to_historical_mv
 ENGINE = MergeTree()
-ORDER BY (`to`, address)
+ORDER BY (`to`, contract)
 POPULATE
-AS SELECT * FROM Transfers;
+AS SELECT * FROM transfers;
