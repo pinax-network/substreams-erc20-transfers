@@ -21,7 +21,7 @@ fn db_out(clock: Clock,transfers: TransferEvents) -> Result<DatabaseChanges, Err
         .change("from", (None, event.from))
         .change("to", (None, event.to))
         .change("value", (None, event.value))
-        .change("transaction", (None, event.tx_id))
+        .change("tx_id", (None, event.tx_id))
         .change("block_num", (None,block.clone() ))
         .change("timestamp", (None, timestamp.clone()));
     }
