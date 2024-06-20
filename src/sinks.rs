@@ -13,15 +13,15 @@ fn db_out(clock: Clock,transfers: TransferEvents) -> Result<DatabaseChanges, Err
     let timestamp = clock.timestamp.unwrap().seconds.to_string();
 
     for event in transfers.transfers {
-        let id = format!("{}-{}", event.block_index, event.transaction);
+        let id = format!("{}-{}", event.block_index, event.tx_id);
 
     // Create row 
     database_changes.push_change("transfers", id, 0, Operation::Create)
-        .change("contract", (None, event.address))
+        .change("contract", (None, event.contract))
         .change("from", (None, event.from))
         .change("to", (None, event.to))
         .change("value", (None, event.value))
-        .change("transaction", (None, event.transaction))
+        .change("transaction", (None, event.tx_id))
         .change("block_num", (None,block.clone() ))
         .change("timestamp", (None, timestamp.clone()));
     }

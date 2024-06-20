@@ -49,7 +49,7 @@ pub fn map_events(block: &Block) -> Vec<TransferEvent> {
 fn decode_transfer(event: Transfer, log: LogView) -> TransferEvent {
     TransferEvent {
         // contract address
-        address: Hex::encode(log.address()),
+        contract: Hex::encode(log.address()),
 
         // event payload
         from: Hex::encode(event.from),
@@ -57,7 +57,7 @@ fn decode_transfer(event: Transfer, log: LogView) -> TransferEvent {
         value: event.value.to_string(),
 
         // trace information
-        transaction: Hex::encode(&log.receipt.transaction.hash),
+        tx_id: Hex::encode(&log.receipt.transaction.hash),
         block_index: log.log.block_index.into(),
     }
 }

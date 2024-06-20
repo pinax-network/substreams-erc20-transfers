@@ -8,7 +8,7 @@ message TransferEvents {
 
 message TransferEvent {
   // contract address
-  string address = 1;
+  string contract = 1;
 
   // event payload
   string from = 2;
@@ -16,6 +16,6 @@ message TransferEvent {
   string value = 4;
 
   // trace information
-  string transaction = 5;
+  string tx_id = 5;
   uint64 block_index = 6;
 }

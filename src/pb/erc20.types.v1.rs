@@ -10,7 +10,7 @@ pub struct TransferEvents {
 pub struct TransferEvent {
     /// contract address
     #[prost(string, tag="1")]
-    pub address: ::prost::alloc::string::String,
+    pub contract: ::prost::alloc::string::String,
     /// event payload
     #[prost(string, tag="2")]
     pub from: ::prost::alloc::string::String,
@@ -20,7 +20,7 @@ pub struct TransferEvent {
     pub value: ::prost::alloc::string::String,
     /// trace information
     #[prost(string, tag="5")]
-    pub transaction: ::prost::alloc::string::String,
+    pub tx_id: ::prost::alloc::string::String,
     #[prost(uint64, tag="6")]
     pub block_index: u64,
 }
