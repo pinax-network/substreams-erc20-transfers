@@ -9,7 +9,7 @@ use substreams_ethereum::pb::eth::v2::Block;
 use substreams_ethereum::Event;
 
 
-#[substreams::handlers::map]
+/*#[substreams::handlers::map]
 fn index_transfers(transfers: TransferEvents) -> Result<Keys, Error> {
     Ok(match transfers.transfers.is_empty() {
         true => Keys::default(),
@@ -17,7 +17,7 @@ fn index_transfers(transfers: TransferEvents) -> Result<Keys, Error> {
             keys: vec!["transfers".to_string()]
         },
     })
-}
+}*/
 
 
 
