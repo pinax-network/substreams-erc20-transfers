@@ -3,7 +3,6 @@ use crate::pb::erc20::types::v1::{TransferEvents, TransferEvent};
 use abi::erc20::events::Transfer;
 use substreams::errors::Error;
 use substreams::Hex;
-use substreams::pb::sf::substreams::index::v1::Keys;
 use substreams_ethereum::block_view::LogView;
 use substreams_ethereum::pb::eth::v2::Block;
 use substreams_ethereum::Event;
@@ -59,6 +58,7 @@ fn decode_transfer(event: Transfer, log: LogView) -> TransferEvent {
         // trace information
         tx_id: Hex::encode(&log.receipt.transaction.hash),
         block_index: log.log.block_index.into(),
+        index: log.index()
     }
 }
 

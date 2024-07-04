@@ -23,5 +23,7 @@ pub struct TransferEvent {
     pub tx_id: ::prost::alloc::string::String,
     #[prost(uint64, tag="6")]
     pub block_index: u64,
+    #[prost(uint32, tag="7")]
+    pub index: u32,
 }
 // @@protoc_insertion_point(module)

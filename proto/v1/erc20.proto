@@ -18,4 +18,5 @@ message TransferEvent {
   // trace information
   string tx_id = 5;
   uint64 block_index = 6;
+  uint32 index=7;
 }
